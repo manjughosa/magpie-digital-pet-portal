@@ -1,0 +1,30 @@
+NOTICE for magpie-digital-pet-portal
+====================================
+
+This package is an unofficial, third-party static showcase page for the
+Digital Pet plugin. It is not affiliated with, endorsed by, or maintained by
+any official community organization or the magpie maintainers. It contains no
+gateway middleware, no provider registration, and no runtime engine.
+
+The page is a single static HTML/CSS/JS document. It does not start a service,
+does not read or write pet saves, and does not process agent requests.
+
+Selected pixel scene backgrounds and sprite frames are redistributed here for
+showcase purposes from the Digital Pet project
+(https://github.com/manjughosa/magpie-digital-pet). Those assets originate
+from sundeth/omnipet (https://github.com/sundeth/omnipet), licensed under
+Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0),
+© Anderson Porto 2025, and are in turn derived from Tortoiseshel's Full Color
+Digimon Dot Sprites
+(https://withthewill.net/threads/22970-Full-Color-Digimon-Dot-Sprites).
+They are not covered by this package's Apache-2.0 license.
+
+The portal icon (page/cover.png and magpie.icon) is derived from the official
+Agumon profile art published on digimon.net
+(https://digimon.net/cimages/digimon/agumon.jpg). Digimon and all associated
+characters are trademarks of Bandai and Toei Animation; the art is not covered
+by this package's Apache-2.0 license and is included only as a small
+identifying icon.
+
+The portal's own HTML, CSS, and JavaScript are licensed under the Apache
+License, Version 2.0 (see LICENSE).

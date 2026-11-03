@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digital Pet · 烧 token，养电子宠物</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <div class="portal-ribbon">
+    <span class="ribbon-dot" aria-hidden="true"></span>
+    <span>当前页面为 <b>Digital Pet</b> 的非官方第三方展示门面 · 与任何官方社区组织无隶属关系 · 完整养成、600+ 宠物图鉴与本地存档位于主插件</span>
+    <a class="ribbon-link" href="https://github.com/manjughosa/magpie-digital-pet" target="_blank" rel="noopener noreferrer" data-pet-link>前往主插件仓库</a>
+  </div>
+
+  <header class="site-header">
+    <div class="brand">
+      <img src="cover.png" alt="Digital Pet 图标" width="38" height="38">
+      <div class="brand-text">
+        <strong>Digital Pet</strong>
+        <span>for Magpie Gateway</span>
+      </div>
+      <span class="tag-pure">Page 门面</span>
+    </div>
+    <nav class="site-nav" aria-label="页面导航">
+      <a href="#showcase">实机橱窗</a>
+      <a href="#scenes">像素场景</a>
+      <a href="#highlights">核心机制</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn-primary" href="https://github.com/manjughosa/magpie-digital-pet" target="_blank" rel="noopener noreferrer" data-pet-link>获取完整版插件</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">烧 token · 养电子宠物</p>
+        <h1 id="hero-title">把每一次请求，<br>变成<em>一次成长。</em></h1>
+      </div>
+      <div class="hero-aside">
+        <p class="lead">
+          它住在 magpie 侧边栏里，自动汇总所有已记账请求的真实 token 喂给当前出战搭档。不注入任何 Agent 上下文，不读取对话内容，也不消耗额外 token。
+        </p>
+        <div class="hero-actions">
+          <a class="btn-primary btn-lg" href="https://github.com/manjughosa/magpie-digital-pet#readme" target="_blank" rel="noopener noreferrer" data-pet-link>打开 Digital Pet 主仓库</a>
+          <button type="button" class="btn-command" id="copy-cmd" data-cmd="magpie plugin add github:manjughosa/magpie-digital-pet" aria-label="复制安装命令">
+            <code>magpie plugin add github:manjughosa/magpie-digital-pet</code>
+            <span class="copy-badge" id="copy-status">复制命令</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase" id="showcase" aria-label="宠物界面互动橱窗">
+      <div class="window-frame">
+        <div class="window-bar">
+          <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="window-title">magpie / 侧边栏「宠物」页 · 实机互动预览</div>
+          <div class="window-switcher" role="group" aria-label="切换预览搭档">
+            <button type="button" class="partner-chip active" data-partner="metaltyrannomon">MetalTyrannomon</button>
+            <button type="button" class="partner-chip" data-partner="agumon">Agumon</button>
+            <button type="button" class="partner-chip" data-partner="gatomon">Gatomon</button>
+            <button type="button" class="partner-chip" data-partner="wargreymon">WarGreymon</button>
+          </div>
+        </div>
+
+        <div class="window-body">
+          <div class="habitat-stage">
+            <div class="scene-viewport" id="scene-viewport" style="background-image: url('assets/scenes/village.webp');">
+              <canvas id="preview-canvas" width="520" height="320" role="img" aria-label="可点击互动的像素宠物预览画布"></canvas>
+              <div class="stage-overlay">
+                <div class="stage-meta">
+                  <strong id="stage-pet-name">MetalTyrannomon</strong>
+                  <span id="stage-pet-meta">stage 5 · 完全体 · 阳光村落</span>
+                </div>
+                <span class="stage-tip" id="stage-tip">点一下宠物或下方照顾按钮试试</span>
+              </div>
+            </div>
+
+            <div class="scene-strip" role="group" aria-label="切换栖息地场景">
+              <button type="button" class="scene-pill active" data-scene="village" data-label="阳光村落" data-bg="assets/scenes/village.webp">阳光村落</button>
+              <button type="button" class="scene-pill" data-scene="night" data-label="月见之丘" data-bg="assets/scenes/night.webp">月见之丘</button>
+              <button type="button" class="scene-pill" data-scene="sakura" data-label="樱之神社" data-bg="assets/scenes/sakura.webp">樱之神社</button>
+              <button type="button" class="scene-pill" data-scene="castle" data-label="丑皇暗堡" data-bg="assets/scenes/castle.webp">丑皇暗堡</button>
+            </div>
+          </div>
+
+          <div class="hud-panel">
+            <div class="hud-head">
+              <div>
+                <h2 id="hud-name">MetalTyrannomon</h2>
+                <p id="hud-status">它正在村落里巡视领地，精神饱满。</p>
+              </div>
+              <span class="badge-live">出战中</span>
+            </div>
+
+            <div class="evo-box">
+              <div class="evo-row">
+                <span id="evo-label">本阶段进化槽 · 2,630.1 万 / 6,250.0 万 token</span>
+                <strong id="evo-pct">64%</strong>
+              </div>
+              <div class="meter evo-meter"><i id="evo-bar" style="width: 64%"></i></div>
+            </div>
+
+            <div class="stats-list" aria-label="五维状态">
+              <div class="stat-item">
+                <span>饱食</span>
+                <div class="meter"><i class="fill-satiety" id="bar-satiety" style="width: 78%"></i></div>
+                <b id="val-satiety">78</b>
+              </div>
+              <div class="stat-item">
+                <span>心情</span>
+                <div class="meter"><i class="fill-mood" id="bar-mood" style="width: 92%"></i></div>
+                <b id="val-mood">92</b>
+              </div>
+              <div class="stat-item">
+                <span>精力</span>
+                <div class="meter"><i class="fill-energy" id="bar-energy" style="width: 84%"></i></div>
+                <b id="val-energy">84</b>
+              </div>
+              <div class="stat-item">
+                <span>清洁</span>
+                <div class="meter"><i class="fill-hygiene" id="bar-hygiene" style="width: 96%"></i></div>
+                <b id="val-hygiene">96</b>
+              </div>
+              <div class="stat-item">
+                <span>亲密</span>
+                <div class="meter"><i class="fill-bond" id="bar-bond" style="width: 88%"></i></div>
+                <b id="val-bond">88</b>
+              </div>
+            </div>
+
+            <div class="care-actions" role="group" aria-label="日常照顾预览">
+              <button type="button" data-action="snack">喂食点心</button>
+              <button type="button" data-action="play">陪它玩耍</button>
+              <button type="button" data-action="clean">打理清洁</button>
+              <button type="button" data-action="expedition">派遣远征</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="window-metrics">
+          <div class="metric-cell">
+            <strong>600+ 宠物</strong>
+            <span>从未知的数码蛋开始孵化、进化、参加属性相克试炼，点亮历代搭档图鉴。</span>
+          </div>
+          <div class="metric-cell">
+            <strong>超过 14 套像素场景</strong>
+            <span>先预览 4 处代表栖息地，其余十余处秘境留待你在探险中收集数据碎片逐步解锁。</span>
+          </div>
+          <div class="metric-cell">
+            <strong>真实 token 记账</strong>
+            <span>支持 6 档养成难度调节经验槽倍率，但账本始终记录真实 token 用量。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scenes-section" id="scenes" aria-labelledby="scenes-title">
+      <div class="section-header">
+        <div>
+          <h2 id="scenes-title">超过 14 套像素场景，每一处都能栖息与远征</h2>
+          <p>这里仅公开 4 处场景预览，点击卡片可切换上方橱窗背景；更多场景留待在主插件中探索解锁。</p>
+        </div>
+      </div>
+
+      <div class="scene-gallery">
+        <article class="scene-card" data-pick-scene="village">
+          <img src="assets/scenes/village.webp" alt="阳光村落像素场景" loading="lazy">
+          <div class="scene-card-info">
+            <strong>阳光村落</strong>
+            <span>初始栖息地 · 0 碎片自带</span>
+          </div>
+        </article>
+        <article class="scene-card" data-pick-scene="night">
+          <img src="assets/scenes/night.webp" alt="月见之丘像素场景" loading="lazy">
+          <div class="scene-card-info">
+            <strong>月见之丘</strong>
+            <span>深夜远征 · 50 碎片解锁</span>
+          </div>
+        </article>
+        <article class="scene-card" data-pick-scene="sakura">
+          <img src="assets/scenes/sakura.webp" alt="樱之神社像素场景" loading="lazy">
+          <div class="scene-card-info">
+            <strong>樱之神社</strong>
+            <span>秘境收藏 · 320 碎片解锁</span>
+          </div>
+        </article>
+        <article class="scene-card" data-pick-scene="castle">
+          <img src="assets/scenes/castle.webp" alt="丑皇暗堡像素场景" loading="lazy">
+          <div class="scene-card-info">
+            <strong>丑皇暗堡</strong>
+            <span>终极收藏 · 520 碎片解锁</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="highlights-section" id="highlights" aria-labelledby="highlights-title">
+      <h2 id="highlights-title" class="sr-only">核心玩法与安全边界</h2>
+      <div class="highlights-grid">
+        <div class="highlight-block">
+          <h3>画布级像素互动与日常养成</h3>
+          <p>支持点击跳跃、按住抚摸冒爱心、拖拽拎起与双击转圈。饱食、心情、精力、清洁与亲密随时间自然呼吸，三档探险与每日目标稳定产出数据碎片。</p>
+        </div>
+        <div class="highlight-block">
+          <h3>疫苗 · 数据 · 病毒相克试炼</h3>
+          <p>当 token 喂满当前阶段阈值，搭档将开启进化对决。克制对手即可突破至下一阶段；即使失利也只需再战一场必定成功。</p>
+        </div>
+        <div class="highlight-block">
+          <h3>零上下文侵入，存档独立</h3>
+          <p>只轮询 magpie 网关自身的记账接口，绝不触碰任何 Agent 的请求体或提示词。SQLite 存档独立保存在用户数据目录，升级插件不丢进度。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-banner" aria-labelledby="final-title">
+      <div class="final-copy">
+        <h2 id="final-title">准备好领养你的第一颗数码蛋了吗？</h2>
+        <p>本插件是非官方第三方展示门面，与任何官方社区组织无隶属关系。前往安装 <code>magpie-digital-pet</code>，在侧边栏开启真正的养成之旅。</p>
+      </div>
+      <div class="final-cta">
+        <a class="btn-primary btn-lg" href="https://github.com/manjughosa/magpie-digital-pet" target="_blank" rel="noopener noreferrer" data-pet-link>前往 Digital Pet 主仓库安装</a>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
