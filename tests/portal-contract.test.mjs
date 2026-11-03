@@ -92,7 +92,17 @@ test("page/index.html includes required copy, interactive showcase, and valid lo
 
   const assetRefs = [...html.matchAll(/\b(?:src|href)="([^"]+)"/g)]
     .map((m) => m[1])
-    .filter((ref) => !ref.startsWith("http://") && !ref.startsWith("https://") && !ref.startsWith("#") && !ref.startsWith("data:"));
+    .filter((ref) => !ref.startsWith("http://") && !ref.startsWith("https://") && !ref.startsWith("#") && !ref.startsWith("data:"))
+    // _magpie/* 由宿主随页面文件一起提供，不是仓库里的本地资产
+    .filter((ref) => !ref.startsWith("_magpie/"));
+
+  // 宿主只给页面 10 秒报到；没有 bridge 的 hello，整页会被换成
+  // 「此页面已停止工作」错误卡（2026-11-03 实测：4 秒内零消息）
+  assert.match(
+    html,
+    /<script src="_magpie\/bridge\.js"><\/script>/,
+    "page must load the host bridge, or magpie replaces it with its stopped-working card",
+  );
 
   assert.ok(assetRefs.length >= 6, "must reference local stylesheet, script, and visual assets");
   for (const ref of assetRefs) {

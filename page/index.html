@@ -6,6 +6,10 @@
   <title>Digital Pet · 烧 token，养电子宠物</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="app.css">
+  <!-- magpie 的 page frame 要在 10 秒内收到 hello，否则整页被换成
+       「此页面已停止工作」错误卡；bridge.js 由宿主随页面文件一起提供，
+       它一加载就会向宿主报到，并接管主题变量。 -->
+  <script src="_magpie/bridge.js"></script>
 </head>
 <body>
   <div class="portal-ribbon">
